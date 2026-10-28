@@ -1,4 +1,4 @@
-# 🪙 Token Tracker for Kilo Code
+# 🪙 Token Tracker for Claude Code
 
 This is a Python-based graphical user interface (GUI) tool designed to scan and estimate the total token count of your game project files when interacting with Anthropic's Claude models. It helps you easily analyze your codebase and predict which Claude subscription plan (Tier) you will need for your future coding workflows.
 
