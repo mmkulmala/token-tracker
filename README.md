@@ -43,4 +43,11 @@ The tool automatically detects and estimates tokens for common game development 
 - **Web files** (`.html`, `.css`)
 - **Configurations & Docs** (`.json`, `.yaml`, `.toml`, `.xml`, `.md`)
 
-The extension-to-language mapping is stored in `language_map.txt` and loaded at startup. Edit that file to add or change supported extensions.
+## 📏 Estimation Limits
+Tier recommendation thresholds used by the app:
+- **FREE Tier**: total context <= 60,000 tokens and daily volume <= 200,000 tokens
+- **PRO Tier**: daily volume > 200,000 tokens
+- **MAX 5x**: total context > 60,000 tokens or daily volume > 1,500,000 tokens
+- **MAX 20x**: total context > 150,000 tokens or daily volume > 5,000,000 tokens
+
+Token estimate uses ~4 characters per token. Sliders for daily iterations and estimated output per prompt affect daily volume and can move the recommendation up or down.
