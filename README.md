@@ -42,3 +42,5 @@ The tool automatically detects and estimates tokens for common game development 
 - **JavaScript / TypeScript** (`.js`, `.ts`)
 - **Web files** (`.html`, `.css`)
 - **Configurations & Docs** (`.json`, `.yaml`, `.toml`, `.xml`, `.md`)
+
+The extension-to-language mapping is stored in `language_map.txt` and loaded at startup. Edit that file to add or change supported extensions.

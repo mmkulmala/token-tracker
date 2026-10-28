@@ -1,0 +1,19 @@
+.py Python
+.gd Godot GDScript
+.nim Nim
+.java Java
+.cs C# (Unity/Godot)
+.js JavaScript
+.ts TypeScript
+.cpp C++ (Unreal)
+.hpp C++ Header
+.h C/C++ Header
+.c C
+.html HTML
+.css CSS
+.json JSON Config
+.yaml YAML Config
+.yml YAML Config
+.toml TOML Config
+.xml XML
+.md Markdown Docs

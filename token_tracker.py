@@ -2,31 +2,32 @@ import os
 import tkinter as tk
 from tkinter import filedialog, ttk
 
-# Extension to Language mapping
-LANGUAGE_MAP = {
-    ".py": "Python",
-    ".gd": "Godot GDScript",
-    ".nim": "Nim",
-    ".java": "Java",
-    ".cs": "C# (Unity/Godot)",
-    ".js": "JavaScript",
-    ".ts": "TypeScript",
-    ".cpp": "C++ (Unreal)",
-    ".hpp": "C++ Header",
-    ".h": "C/C++ Header",
-    ".c": "C",
-    ".html": "HTML",
-    ".css": "CSS",
-    ".json": "JSON Config",
-    ".yaml": "YAML Config",
-    ".yml": "YAML Config",
-    ".toml": "TOML Config",
-    ".xml": "XML",
-    ".md": "Markdown Docs"
-}
-
 # Folders to ignore during scanning
 IGNORE_FOLDERS = {".git", "node_modules", "venv", ".venv", "__pycache__", "build", "dist"}
+
+
+def load_language_map(path=None):
+    if path is None:
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "language_map.txt")
+    language_map = {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                parts = line.split(None, 1)
+                if len(parts) != 2:
+                    continue
+                ext, language = parts
+                language_map[ext.lower()] = language
+    except FileNotFoundError:
+        pass
+    return language_map
+
+
+# Extension to Language mapping (loaded from text file at startup)
+LANGUAGE_MAP = load_language_map()
 
 class TokenTrackerApp:
     def __init__(self, root):
