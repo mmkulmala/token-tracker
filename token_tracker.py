@@ -6,6 +6,8 @@ from tkinter import filedialog, ttk
 LANGUAGE_MAP = {
     ".py": "Python",
     ".gd": "Godot GDScript",
+    ".nim": "Nim",
+    ".java": "Java",
     ".cs": "C# (Unity/Godot)",
     ".js": "JavaScript",
     ".ts": "TypeScript",
