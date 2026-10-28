@@ -6,5 +6,11 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
 
+[project.scripts]
+token-tracker = "token_tracker:main"
+
 [tool.uv]
-package = false
+package = true
+
+[tool.setuptools.package-data]
+token_tracker = ["language_map.txt"]

@@ -6,9 +6,35 @@ from tkinter import filedialog, ttk
 IGNORE_FOLDERS = {".git", "node_modules", "venv", ".venv", "__pycache__", "build", "dist"}
 
 
+DEFAULT_LANGUAGE_MAP_TEXT = """# Extension to Language mapping
+.py Python
+.gd Godot GDScript
+.nim Nim
+.java Java
+.cs C# (Unity/Godot)
+.js JavaScript
+.ts TypeScript
+.cpp C++ (Unreal)
+.hpp C++ Header
+.h C/C++ Header
+.c C
+.html HTML
+.css CSS
+.json JSON Config
+.yaml YAML Config
+.yml YAML Config
+.toml TOML Config
+.xml XML
+.md Markdown Docs
+"""
+
+
 def load_language_map(path=None):
     if path is None:
         path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "language_map.txt")
+    if not os.path.exists(path):
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(DEFAULT_LANGUAGE_MAP_TEXT)
     language_map = {}
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -191,7 +217,11 @@ class TokenTrackerApp:
             
         self.lbl_tier_recommendation.config(text=recommendation)
 
-if __name__ == "__main__":
+def main():
     root = tk.Tk()
     app = TokenTrackerApp(root)
     root.mainloop()
+
+
+if __name__ == "__main__":
+    main()

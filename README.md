@@ -10,7 +10,24 @@ This is a Python-based graphical user interface (GUI) tool designed to scan and 
 - **Smart Filtering**: Automatically ignores heavy repository or environment folders (such as `.git`, `node_modules`, `venv`, `__pycache__`) so they won't distort your game's true context size.
 - **Dynamic Tier Recommendation**: Calculates your estimated daily token volume based on your custom prompt iterations, advising whether you fit into the **Free ($0/mo)**, **Pro ($20/mo)**, **Max 5x ($100/mo)**, or **Max 20x ($200/mo)** tiers.
 
-## 🚀 Getting Started (uv)
+## 📦 Installation
+Install as an application (creates a `token-tracker` command):
+
+```bash
+uv tool install .
+```
+
+Then run:
+
+```bash
+token-tracker
+```
+
+For development, run directly:
+
+```bash
+uv run token_tracker.py
+```
 
 Since this project uses the modern `uv` package manager, installation and execution are extremely fast and straightforward.
 
@@ -27,11 +44,22 @@ uv run token_tracker.py
 ```
 
 ## ⚙️ Project Settings (`pyproject.toml`)
-Ensure your `pyproject.toml` file is configured as a standalone script (rather than an installable package) by adding the following setting to the end of the file:
+The project is configured as an installable package:
 
 ```toml
+[project]
+name = "token-tracker"
+version = "0.1.0"
+description = "Token tracker"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+token-tracker = "token_tracker:main"
+
 [tool.uv]
-package = false
+package = true
 ```
 
 ## 📝 Supported Languages & Formats
