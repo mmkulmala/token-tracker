@@ -1,4 +1,5 @@
 import os
+import csv
 import tkinter as tk
 from tkinter import filedialog, ttk
 
@@ -10,6 +11,7 @@ DEFAULT_LANGUAGE_MAP_TEXT = """# Extension to Language mapping
 .py Python
 .gd Godot GDScript
 .nim Nim
+.nims NimScript
 .java Java
 .cs C# (Unity/Godot)
 .js JavaScript
@@ -64,6 +66,7 @@ class TokenTrackerApp:
         
         self.project_path = ""
         self.total_input_tokens = 0
+        self.scan_rows = []
         
         self.create_widgets()
         
@@ -72,8 +75,11 @@ class TokenTrackerApp:
         top_frame = ttk.Frame(self.root, padding="10")
         top_frame.pack(fill=tk.X)
         
-        self.btn_browse = ttk.Button(top_frame, text="Select Game Project Folder...", command=self.browse_folder)
+        self.btn_browse = ttk.Button(top_frame, text="Select Project Folder...", command=self.browse_folder)
         self.btn_browse.pack(side=tk.LEFT, padx=5)
+        
+        self.btn_export = ttk.Button(top_frame, text="Export CSV...", command=self.export_csv)
+        self.btn_export.pack(side=tk.LEFT, padx=5)
         
         self.lbl_path = ttk.Label(top_frame, text="No folder selected", font=("Arial", 10, "italic"), foreground="gray")
         self.lbl_path.pack(side=tk.LEFT, padx=10, fill=tk.X, expand=True)
@@ -179,12 +185,44 @@ class TokenTrackerApp:
                         
                         # Insert relative or absolute path name into the tree view
                         display_name = os.path.relpath(file_path, self.project_path)
+                        self.scan_rows.append((display_name, lang, file_size_kb, tokens))
                         self.tree.insert("", tk.END, values=(display_name, lang, f"{file_size_kb:,}", f"{tokens:,}"))
                     except Exception:
                         pass # Safeguard against locked/system files
                         
         self.update_analysis()
         
+    def export_csv(self):
+        if not self.scan_rows:
+            return
+        path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")])
+        if not path:
+            return
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["File", "Language", "Size (KB)", "Est. Tokens"])
+            writer.writerows(self.scan_rows)
+            writer.writerow([])
+            writer.writerow(["Total", "", "", self.total_input_tokens])
+            iterations = self.var_iterations.get()
+            output_estimate = self.var_output_tokens.get()
+            daily_grand_total = self.total_input_tokens * iterations + output_estimate * iterations
+            if self.total_input_tokens == 0:
+                recommendation = "No compatible code files found."
+            elif self.total_input_tokens > 150000 or daily_grand_total > 5000000:
+                recommendation = "MAX 20x ($200/mo)"
+            elif self.total_input_tokens > 60000 or daily_grand_total > 1500000:
+                recommendation = "MAX 5x ($100/mo)"
+            elif daily_grand_total > 200000:
+                recommendation = "PRO Tier ($20/mo)"
+            else:
+                recommendation = "FREE Tier ($0/mo)"
+            writer.writerow([])
+            writer.writerow(["Daily iterations", iterations])
+            writer.writerow(["Output tokens per prompt", output_estimate])
+            writer.writerow(["Estimated daily volume", daily_grand_total])
+            writer.writerow(["Recommended tier", recommendation])
+
     def update_analysis(self, *args):
         iterations = self.var_iterations.get()
         output_estimate = self.var_output_tokens.get()

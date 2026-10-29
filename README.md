@@ -1,16 +1,21 @@
 # 🪙 Token Tracker for Claude Code
 
-This is a Python-based graphical user interface (GUI) tool designed to scan and estimate the total token count of your game project files when interacting with Anthropic's Claude models. It helps you easily analyze your codebase and predict which Claude subscription plan (Tier) you will need for your future coding workflows.
+This is a Python-based graphical user interface (GUI) tool designed to scan and estimate the total token count of your project files when interacting with Anthropic's Claude models. It helps you easily analyze your codebase and predict which Claude subscription plan (Tier) you will need for your future coding workflows.
 
 ## ✨ Features
 
-- **Folder Scanning**: Select your game project's root directory directly from the graphical user interface.
+- **Folder Scanning**: Select your project's root directory directly from the graphical user interface.
 - **Automatic Language Detection**: Instantly identifies and categorizes your files based on their extensions (e.g., Python, Godot GDScript, C# for Unity/Unreal, etc.).
 - **File & Token Breakdown**: Displays file names, detected languages, sizes (KB), and token estimates in a clean, scrollable table.
-- **Smart Filtering**: Automatically ignores heavy repository or environment folders (such as `.git`, `node_modules`, `venv`, `__pycache__`) so they won't distort your game's true context size.
+- **Smart Filtering**: Automatically ignores heavy repository or environment folders (such as `.git`, `node_modules`, `venv`, `__pycache__`) so they won't distort your project's true context size.
 - **Dynamic Tier Recommendation**: Calculates your estimated daily token volume based on your custom prompt iterations, advising whether you fit into the **Free ($0/mo)**, **Pro ($20/mo)**, **Max 5x ($100/mo)**, or **Max 20x ($200/mo)** tiers.
 
-## 📦 Installation
+## 🖥️ Usage
+1. Launch the app with `token-tracker` (or `uv run token_tracker.py`).
+2. Click **Select Project Folder...** and choose your project root.
+3. Review detected files, languages, sizes, and token estimates.
+4. Adjust **Daily Iterations** and **Est. Claude Output per Prompt** sliders to see tier changes.
+5. Click **Export CSV...** to save the estimation report.
 Install as an application (creates a `token-tracker` command):
 
 ```bash
@@ -63,7 +68,7 @@ package = true
 ```
 
 ## 📝 Supported Languages & Formats
-The tool automatically detects and estimates tokens for common game development files, including:
+The tool automatically detects and estimates tokens for common project development files, including:
 - **Python** (`.py`)
 - **Godot GDScript** (`.gd`)
 - **C# / C++ / C** (`.cs`, `.cpp`, `.hpp`, `.h`, `.c`)

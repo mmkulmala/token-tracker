@@ -1,6 +1,7 @@
 .py Python
 .gd Godot GDScript
 .nim Nim
+.nims NimScript
 .java Java
 .cs C# (Unity/Godot)
 .js JavaScript
