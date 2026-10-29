@@ -91,6 +91,8 @@ The tool automatically detects and estimates tokens for common project developme
 - **Web files** (`.html`, `.css`)
 - **Configurations & Docs** (`.json`, `.yaml`, `.toml`, `.xml`, `.md`)
 
+For more language see **language_map.txt**, where you can add languages you want with format: <file_type> <language_name>.
+
 ## 📏 Estimation Limits
 Tier recommendation thresholds used by the app:
 - **FREE Tier**: total context <= 60,000 tokens and daily volume <= 200,000 tokens
