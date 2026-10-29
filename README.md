@@ -16,6 +16,21 @@ This is a Python-based graphical user interface (GUI) tool designed to scan and 
 3. Review detected files, languages, sizes, and token estimates.
 4. Adjust **Daily Iterations** and **Est. Claude Output per Prompt** sliders to see tier changes.
 5. Click **Export CSV...** to save the estimation report.
+## 🖥️ UI Overview
+- **Left panel**: file list with detected language, size (KB), and estimated tokens.
+- **Right panel**: sliders for daily iterations and output tokens, totals, and tier recommendation.
+- **Top bar**: select project folder and export CSV report.
+
+## 🧪 Example Workflow
+1. Run `token-tracker`.
+2. Click **Select Project Folder...** and choose `/home/user/my-project`.
+3. Wait for the file list to populate.
+4. Adjust sliders until the recommended tier fits your needs.
+5. Click **Export CSV...**, choose `report.csv`, and open it to review files, totals, daily volume, and tier.
+- **Left panel**: file list with detected language, size (KB), and estimated tokens.
+- **Right panel**: sliders for daily iterations and output tokens, totals, and tier recommendation.
+- **Top bar**: select project folder and export CSV report.
+
 Install as an application (creates a `token-tracker` command):
 
 ```bash
